@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
-const Villian = require('./Villians.js')
+const Villian = require('./villians.js')
 
 var movieSchema = Schema({
     title: String,

@@ -2,11 +2,12 @@ const express = require('express');
 const jsonParser = require('body-parser').json();
 const Villian = require(`${__dirname}/../models/villians.js`);
 const Movie = require('../models/movies.js');
-const sendMessage = require('../lib/sendMessage.js');
+const sendMessage = require('../lib/sendMsg.js');
 
 const Router = module.exports = express.Router();
 
 Router.post('/villians', jsonParser ,(req, res, next) => {
+  console.log(req.body);
     const newVillian = new Villian(req.body);
     newVillian.save().then(message => res.send(message))
     .catch(err => next({error: err}));
@@ -20,8 +21,8 @@ Router.get('/villians/:id', (req, res, next) => {
 
 Router.get('/villians', (req, res) => {
     Villian.find(req.query || {})
-        .then(villians => res.send('We successfully picked all the villians'))
-        .catch(err => res.send('Nope'));
+        .then(villians => res.send(villians))
+        .catch(err => res.send('No'));
 });
 
 Router.put('/villians/:id',jsonParser,  (req, res, next) => {
